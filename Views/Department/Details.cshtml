@@ -1,0 +1,89 @@
+﻿@model _1263087.Models.Department
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#docInfo").click(function () {
+            $.ajax({
+                url: "@Url.Action("DoctorInfo", "Department", new { id=@Model.DepartmentID})",
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    $("#infoDisplay table tbody").empty;
+                    for (var i = 0; i < result.length; i++) {
+                        $("#infoDisplay table tbody").append("<tr><td>" + result[i].docName + "</td><td>" + result[i].docEmail + "</td><td>" + result[i].joiningDate + "</td><td>" + result[i].docPhone + "</td><td>" + result[i].docTotalBill + "</td></tr>")
+
+                    };
+                    $("#infoDisplay").show();
+                }
+            });
+            this.disabled = true;
+        });
+    });
+</script>
+
+
+<div>
+    <div class="row">
+        <div class="col-md-10">
+            <fieldset>
+                <legend>Department Information</legend>
+                <span class="display-label">
+                    @Html.DisplayNameFor(model => model.DepartmentName) :
+                </span>
+                <span class="display-label">
+                    @Html.DisplayFor(model => model.DepartmentName)
+                </span>
+                <br />
+                <span class="display-label">
+                    @Html.DisplayNameFor(model => model.AvailableSeat) :
+                </span>
+                <span class="display-label">
+                    @Html.DisplayFor(model => model.AvailableSeat)
+                </span>
+                <br />
+                <span class="display-label">
+                    @Html.DisplayNameFor(model => model.IsActive) :
+                </span>
+                <span class="display-label">
+                    @Html.DisplayFor(model => model.IsActive)
+                </span>
+            </fieldset>
+
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.DepartmentID }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-md-10">
+                <div>
+                    <button class="btn btn-info" id="docInfo" data-exam-id="@Model.DepartmentID">Doctor Information</button>
+                </div>
+                <div id="infoDisplay" style="display:none">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Doctor Name</th>
+                                <th>Email</th>
+                                <th>Joining date</th>
+                                <th>Phone Number</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

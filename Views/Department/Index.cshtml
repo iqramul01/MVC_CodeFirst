@@ -1,0 +1,81 @@
+﻿@model PagedList.IPagedList<_1263087.Models.Department>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h2>Index</h2>
+<p>
+    <h3>{CRUD Operation Using View Model, Required Validation, Range Validation, Validation Summary, Boolean}</h3>
+    <h4>{Using Shorting, Filtering and Pagination}</h4>
+</p>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Department Name : @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    </p>
+
+}
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.ActionLink("Department Name", "Index", new { sortOrder = ViewBag.NameSortParam })
+        </th>
+        @*<th>
+                Department Name
+            </th>*@
+        <th>
+            Available Seat
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvailableSeat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+
+                @*@Html.DisplayFor(modelItem => item.IsActive)*@
+
+            </td>
+            <td>
+                @*<a href="@Url.Action("Edit","Department",new { id=item.DepartmentID })" class="editDialog">
+                    <i class="fade fa-pencil-square-o"></i>Edit
+                </a>
+                <a href="@Url.Action("Delete","Department",new { id=item.DepartmentID })" class="editDialog">
+                    <i class="fade fa-pencil-square-o"></i>Delete
+                </a>*@
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentID },new { @class="btn btn-primary btn-sm"}) 
+                @Html.ActionLink("Details", "Details", new { id = item.DepartmentID },new { @class="btn btn-info btn-sm"}) 
+                @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentID },new { @class="btn btn-danger btn-sm"})
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+

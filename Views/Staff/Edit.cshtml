@@ -1,0 +1,67 @@
+﻿@model _1263087.Models.Staff
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm("Edit", "Staff", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }))
+
+{
+    @Html.HiddenFor(m => m.StaffID)
+    <div class="modal-body">
+
+        <div class="row form-group">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user-plus"></i></span>
+                    @Html.TextBoxFor(m => m.StaffName, new { @class = "form-control", @placeholder = "StaffName" })
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user-plus"></i></span>
+                    @Html.TextBoxFor(m => m.ContactAddress, new { @class = "form-control", @placeholder = "ContactAddress" })
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user-plus"></i></span>
+                    @Html.EditorFor(m => m.DateOfBirth, new { @class = "form-control", @placeholder = "DateOfBirth", Type="date" })
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user-plus"></i></span>
+                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "PhoneNumber" })
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user-plus"></i></span>
+                    @Html.DropDownList("DepartmentID", null, htmlAttributes: new { @class = "form-control", @placeholder = "DepartmentName" })
+
+                    @*@Html.TextBoxFor(m => m.DepartmentID, new { @class = "form-control", @placeholder = "Department" })*@
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i>Close</button>
+        <button type="submit" class="btn btn-primary" name="cmd"><i class="fa fa-check"></i>Save Changes</button>
+
+    </div>
+
+}

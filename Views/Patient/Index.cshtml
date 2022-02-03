@@ -1,0 +1,89 @@
+﻿@model IEnumerable<_1263087.Models.Patient>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<p>
+    <h3>
+        {CRUD Operation Using Model, Required Validation, Validation Summary, Multiple Foreign key, Cascade Dropdown.}
+    </h3>
+</p>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmergencyContact)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.BloodGroup.BloodGroupName)*@
+            Blood Group
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Division.DivisionName)*@
+            Division
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.District.DistrictName)*@
+            District
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Upazila.UpazilaName)*@
+            Upazila
+        </th>
+        <th>
+            @* @Html.DisplayNameFor(model => model.Department.DepartmentName)*@
+            Department
+        </th>
+        <th>
+            @* @Html.DisplayNameFor(model => model.Doctor.DoctorName)*@
+            Doctor
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.PatientName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EmergencyContact)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BloodGroup.BloodGroupName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Division.DivisionName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.District.DistrictName)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Upazila.UpazilaName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Doctor.DoctorName)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.PatientID }, new { @class = "btn btn-primary btn-sm" })
+        @Html.ActionLink("Details", "Details", new { id = item.PatientID }, new { @class = "btn btn-info btn-sm" })
+        @Html.ActionLink("Delete", "Delete", new { id = item.PatientID }, new { @class = "btn btn-danger btn-sm" })
+    </td>
+</tr>
+}
+
+</table>

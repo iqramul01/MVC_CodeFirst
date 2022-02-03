@@ -1,0 +1,98 @@
+﻿@model IEnumerable<_1263087.Models.Doctor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<p>
+    <h3>
+        {CRUD Operation Using Model,Remote, Required Validation, Regular Expression, Compare Validation, Validation Summary, StringLength, Image, Computed Column, Date picker.}
+    </h3>
+</p>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+
+        <th>
+            Name
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+           Email
+        </th>
+        <th>
+            Phone
+        </th>
+
+        <th>
+            Joining Date
+        </th>
+        <th>
+            Salary
+        </th>
+        <th>
+           Commission
+        </th>
+        <th>
+            Total Bill
+        </th>
+        <th>
+            Image
+        </th>
+        <th>
+            Department
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.DoctorName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ContactAddress)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EmailAddress)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PhoneNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.JoiningDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Salary)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Commission)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TotalBill)
+    </td>
+    <td>
+        @*@Html.DisplayFor(modelItem => item.DoctorImage)*@
+        <img src="@Url.Content(item.DoctorImage)" height="80" width="80" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.DoctorID },new { @class="btn btn-primary btn-sm"}) 
+        @Html.ActionLink("Details", "Details", new { id = item.DoctorID },new { @class="btn btn-info btn-sm"}) 
+        @Html.ActionLink("Delete", "Delete", new { id = item.DoctorID },new { @class="btn btn-danger btn-sm"})
+    </td>
+</tr>
+}
+
+</table>

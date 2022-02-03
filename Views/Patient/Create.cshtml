@@ -1,0 +1,128 @@
+﻿@model _1263087.Models.Patient
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Patient</h4>
+    <hr />
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.PatientName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PatientName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PatientName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EmergencyContact, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EmergencyContact, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.EmergencyContact, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BloodGroupID, "BloodGroupID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("BloodGroupID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DivisionID, "DivisionID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.DivisionID, ViewBag.DivisionList as SelectList, "--Select Division--", new { @class = "form-control" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DistrictID, "DistrictID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.DistrictID, new SelectList(""), "--Select District--", new { @class = "form-control" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UpazilaID, "UpazilaID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.UpazilaID, new SelectList(""), "--Select Upazila--", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DepartmentID, "DepartmentID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.DepartmentID, ViewBag.DepartmentList as SelectList, "--Select Department--", new { @class = "form-control" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DoctorID, "DoctorID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.DropDownListFor(model => model.DoctorID, new SelectList(""), "--Select Doctor--", new { @class = "form-control" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#DivisionID").change(function () {
+            $.get("/Patient/GetDistrictList", { DivisionID: $("#DivisionID").val() }, function (data) {
+                $("#DistrictID").empty();
+                $.each(data, function (index, row) {
+                    $("#DistrictID").append("<option value= '" + row.DistrictID + "'>" + row.DistrictName + "</option>");
+                });
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $("#DistrictID").change(function () {
+            $.get("/Patient/GetUpazilaList", { DistrictID: $("#DistrictID").val() }, function (data) {
+                $("#UpazilaID").empty();
+                $.each(data, function (index, row) {
+                    $("#UpazilaID").append("<option value= '" + row.UpazilaID + "'>" + row.UpazilaName + "</option>");
+                });
+            });
+        });
+    });
+
+
+    $(document).ready(function () {
+        $("#DepartmentID").change(function () {
+            $.get("/Patient/GetDoctorList", { DepartmentID: $("#DepartmentID").val() }, function (data) {
+                $("#DoctorID").empty();
+                $.each(data, function (index, row) {
+                    $("#DoctorID").append("<option value= '" + row.DoctorID + "'>" + row.DoctorName + "</option>");
+                });
+            });
+        });
+    });
+</script>

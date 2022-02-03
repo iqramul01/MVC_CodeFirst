@@ -1,0 +1,108 @@
+﻿@model _1263087.Models.Doctor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Doctor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Department.DepartmentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department.DepartmentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DoctorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DoctorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.ConfirmPhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfirmPhoneNumber)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JoiningDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JoiningDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Salary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commission)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commission)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalBill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalBill)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DoctorImage)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.DoctorImage)*@
+
+            <img src="@Url.Content(@Model.DoctorImage)" height="80" width="80" alt="Picture Loading Problem" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DoctorID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
